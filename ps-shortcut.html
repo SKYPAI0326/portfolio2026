@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PS Shortcut Vault - Pro</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.3.4/dist/vue.global.prod.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        [v-cloak] { display: none; }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #F8FAFC;
+        }
+
+        /* 頂部深色區域與曲線 */
+        .header-curve {
+            background-color: #0F172A; 
+            height: 320px;
+            border-radius: 0 0 80px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 白色內容區域與反向圓角 */
+        .content-body {
+            background-color: #FFFFFF;
+            margin-top: -80px;
+            border-radius: 80px 0 0 0;
+            padding-top: 60px;
+            min-height: 600px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 系統標籤顏色 */
+        .pill-active { background-color: #2DD4BF; color: white; box-shadow: 0 10px 15px -3px rgba(45, 212, 191, 0.4); }
+
+        /* 實體按鍵感樣式 */
+        .key-win {
+            background: white;
+            color: #2563EB;
+            box-shadow: 0 2px 0 #BFDBFE;
+            border: 1px solid #DBEAFE;
+        }
+
+        .key-mac {
+            background: #1E293B;
+            color: #2DD4BF;
+            box-shadow: 0 2px 0 #000000;
+            border: 1px solid #334155;
+        }
+
+        .card-item {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 35px;
+        }
+        .card-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 50px -12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 右上角計數勳章 */
+        .count-badge {
+            background: rgba(45, 212, 191, 0.1);
+            border: 1px solid rgba(45, 212, 191, 0.3);
+            color: #2DD4BF;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-thumb { background: #E2E8F0; border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+<div id="app" v-cloak>
+    <!-- Top Header -->
+    <header class="header-curve px-8 pt-12 text-white">
+        <div class="max-w-6xl mx-auto flex justify-between items-start relative">
+            <div>
+                <p class="text-teal-400 font-bold tracking-[0.2em] text-[10px] uppercase mb-1 opacity-80">Designer Resources</p>
+                <h1 class="text-4xl font-extrabold tracking-tight">Shortcut <span class="text-teal-400">Vault</span></h1>
+            </div>
+            
+            <!-- 右上角快捷鍵計數器 -->
+            <div class="count-badge px-5 py-2 rounded-2xl flex flex-col items-center backdrop-blur-md">
+                <span class="text-[9px] font-black uppercase tracking-tighter opacity-70">Total Items</span>
+                <span class="text-2xl font-black leading-none mt-1">{{ totalShortcuts }}</span>
+            </div>
+        </div>
+
+        <!-- Floating Search -->
+        <div class="max-w-xl mx-auto mt-12 relative z-10">
+            <div class="absolute left-6 top-1/2 -translate-y-1/2 text-slate-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </div>
+            <input 
+                type="text" 
+                v-model="searchQuery"
+                placeholder="搜尋工具、指令或鍵位 (例: V, 裁切)..."
+                class="w-full bg-slate-800/90 backdrop-blur-xl border border-slate-700/50 pl-16 pr-8 py-5 rounded-[2rem] text-white placeholder-slate-500 focus:ring-4 focus:ring-teal-400/20 outline-none transition-all shadow-2xl text-lg"
+            >
+        </div>
+    </header>
+
+    <!-- Content -->
+    <main class="content-body px-8 pb-24">
+        <div class="max-w-6xl mx-auto">
+            
+            <!-- Category Tabs (Pill style) -->
+            <div class="flex gap-2 overflow-x-auto pb-10 no-scrollbar">
+                <button 
+                    @click="searchQuery = ''"
+                    class="px-6 py-3 rounded-full font-bold text-xs transition-all whitespace-nowrap"
+                    :class="searchQuery === '' ? 'pill-active' : 'bg-slate-100 text-slate-400 hover:bg-slate-200'"
+                >
+                    All Commands
+                </button>
+                <button 
+                    v-for="cat in categories" 
+                    @click="searchQuery = cat"
+                    class="px-6 py-3 rounded-full font-bold text-xs whitespace-nowrap transition-all"
+                    :class="searchQuery === cat ? 'pill-active' : 'bg-slate-100 text-slate-400 hover:bg-slate-200'"
+                >
+                    {{ cat }}
+                </button>
+            </div>
+
+            <!-- List Groups -->
+            <div v-for="(items, category) in filteredGroups" :key="category" class="mb-20">
+                <div class="flex items-center gap-6 mb-10">
+                    <h2 class="text-4xl font-black text-slate-900 tracking-tighter">{{ category }}</h2>
+                    <div class="h-[2px] flex-grow bg-slate-50 rounded-full"></div>
+                    <span class="text-slate-300 font-bold text-sm">{{ items.length }} items</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div v-for="item in items" :key="item.Action_EN" class="card-item bg-white border border-slate-100 p-8 flex flex-col justify-between shadow-sm">
+                        
+                        <div>
+                            <div class="flex justify-between items-start mb-6">
+                                <span class="bg-teal-50 text-teal-600 text-[9px] px-3 py-1.5 rounded-xl font-black uppercase tracking-widest border border-teal-100">
+                                    {{ item.Subcategory }}
+                                </span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-800 leading-tight">{{ item.Action_ZH }}</h3>
+                            <p class="text-xs text-slate-400 mt-2 font-semibold font-mono">{{ item.Action_EN }}</p>
+                        </div>
+
+                        <div class="mt-10 space-y-3">
+                            <!-- Windows Section (加強版藍色調) -->
+                            <div class="flex items-center justify-between bg-blue-50/70 p-3 rounded-2xl border border-blue-100">
+                                <div class="flex items-center gap-2 pl-1">
+                                    <div class="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6]"></div>
+                                    <span class="text-[10px] font-black text-blue-500 uppercase tracking-widest">Win</span>
+                                </div>
+                                <div class="flex gap-1.5">
+                                    <span v-for="key in parseKeys(item.Windows)" class="key-win px-2.5 py-1 rounded-lg text-[11px] font-bold">
+                                        {{ key }}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- MacOS Section (保持高對比深色) -->
+                            <div class="flex items-center justify-between bg-slate-900 p-3 rounded-2xl shadow-inner">
+                                <div class="flex items-center gap-2 pl-1">
+                                    <div class="w-1.5 h-1.5 rounded-full bg-teal-400 shadow-[0_0_8px_#2dd4bf]"></div>
+                                    <span class="text-[10px] font-black text-slate-500 uppercase tracking-widest">Mac</span>
+                                </div>
+                                <div class="flex gap-1.5">
+                                    <span v-for="key in parseKeys(item.macOS)" class="key-mac px-2.5 py-1 rounded-lg text-[11px] font-bold">
+                                        {{ key }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div v-if="item.Notes" class="mt-5 pt-5 border-t border-slate-50 text-[10px] text-slate-400 italic leading-relaxed">
+                            <span class="text-teal-400 font-bold not-italic">Pro Tip:</span> {{ item.Notes }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty Search -->
+            <div v-if="Object.keys(filteredGroups).length === 0" class="text-center py-40">
+                <div class="text-5xl mb-6">🔭</div>
+                <h3 class="text-2xl font-bold text-slate-800 tracking-tight">No shortcuts match your search</h3>
+                <p class="text-slate-400 mt-2">Try using tool names like "Crop" or keys like "Shift"</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Decorative Footer -->
+    <footer class="max-w-6xl mx-auto py-12 text-center border-t border-slate-100">
+        <p class="text-slate-300 text-xs font-bold tracking-[0.3em] uppercase">Photoshop Keyboard Shortcuts Vault v2.0</p>
+    </footer>
+</div>
+
+<script>
+    const { createApp, ref, computed } = Vue;
+
+    const rawShortcuts = [
+        {"Category":"Tools","Subcategory":"Basic Tools","Action_ZH":"移動工具","Action_EN":"Move Tool","Windows":"V","macOS":"V","Notes":"按住 Shift + 字母鍵可切換同組工具"},
+        {"Category":"Tools","Subcategory":"Basic Tools","Action_ZH":"矩形 / 橢圓選取畫面","Action_EN":"Marquee Tools","Windows":"M","macOS":"M","Notes":"Shift + M 切換矩形/橢圓"},
+        {"Category":"Tools","Subcategory":"Basic Tools","Action_ZH":"套索 / 多邊形 / 磁性套索","Action_EN":"Lasso Tools","Windows":"L","macOS":"L","Notes":"Shift + L 切換套索種類"},
+        {"Category":"Tools","Subcategory":"Basic Tools","Action_ZH":"快速選取 / 魔術棒 / 物件選取","Action_EN":"Quick Selection / Magic Wand","Windows":"W","macOS":"W","Notes":"Shift + W 切換選取工具"},
+        {"Category":"Tools","Subcategory":"Basic Tools","Action_ZH":"裁切 / 透視裁切","Action_EN":"Crop Tool","Windows":"C","macOS":"C","Notes":"Shift + C 切換裁切工具"},
+        {"Category":"Tools","Subcategory":"Basic Tools","Action_ZH":"滴管工具","Action_EN":"Eyedropper Tool","Windows":"I","macOS":"I","Notes":"取樣顏色"},
+        {"Category":"Tools","Subcategory":"Retouching","Action_ZH":"污點修復筆刷 / 修補工具","Action_EN":"Spot Healing Brush / Patch Tool","Windows":"J","macOS":"J","Notes":"Shift + J 切換修復工具"},
+        {"Category":"Tools","Subcategory":"Painting","Action_ZH":"筆刷 / 鉛筆 / 顏色替換","Action_EN":"Brush / Pencil / Color Replacement","Windows":"B","macOS":"B","Notes":"Shift + B 切換筆刷類工具"},
+        {"Category":"Tools","Subcategory":"Retouching","Action_ZH":"仿製印章 / 圖樣印章","Action_EN":"Clone Stamp / Pattern Stamp","Windows":"S","macOS":"S","Notes":"Alt/Option 點擊取樣"},
+        {"Category":"Tools","Subcategory":"Painting","Action_ZH":"歷史記錄筆刷","Action_EN":"History Brush","Windows":"Y","macOS":"Y","Notes":"還原局部畫布"},
+        {"Category":"Tools","Subcategory":"Editing","Action_ZH":"橡皮擦工具","Action_EN":"Eraser Tool","Windows":"E","macOS":"E","Notes":"擦除像素或圖層內容"},
+        {"Category":"Tools","Subcategory":"Painting","Action_ZH":"漸層 / 油漆桶工具","Action_EN":"Gradient / Paint Bucket","Windows":"G","macOS":"G","Notes":"Shift + G 切換填色工具"},
+        {"Category":"Tools","Subcategory":"Vector","Action_ZH":"鋼筆 / 自由鋼筆","Action_EN":"Pen Tool","Windows":"P","macOS":"P","Notes":"繪製向量路徑"},
+        {"Category":"Tools","Subcategory":"Type","Action_ZH":"橫向文字工具","Action_EN":"Horizontal Type Tool","Windows":"T","macOS":"T","Notes":"點擊輸入文字"},
+        {"Category":"Tools","Subcategory":"Vector","Action_ZH":"路徑選取 / 直接選取","Action_EN":"Path / Direct Selection","Windows":"A","macOS":"A","Notes":"黑箭頭(路徑)與白箭頭(節點)"},
+        {"Category":"Tools","Subcategory":"Vector","Action_ZH":"形狀工具 (矩形/橢圓/多邊形)","Action_EN":"Shape Tools","Windows":"U","macOS":"U","Notes":"Shift + U 切換形狀"},
+        {"Category":"Tools","Subcategory":"Navigation","Action_ZH":"手形工具","Action_EN":"Hand Tool","Windows":"H","macOS":"H","Notes":"平移檢視畫布"},
+        {"Category":"Tools","Subcategory":"Navigation","Action_ZH":"縮放工具 (放大鏡)","Action_EN":"Zoom Tool","Windows":"Z","macOS":"Z","Notes":"點擊或拖曳縮放"},
+        {"Category":"Tools","Subcategory":"Color & Mode","Action_ZH":"預設前景/背景色 (黑白)","Action_EN":"Default Colors (Black/White)","Windows":"D","macOS":"D","Notes":"重置色彩為前黑後白"},
+        {"Category":"Tools","Subcategory":"Color & Mode","Action_ZH":"切換前景與背景色","Action_EN":"Switch Foreground/Background","Windows":"X","macOS":"X","Notes":"對調前後色彩"},
+        {"Category":"Tools","Subcategory":"Color & Mode","Action_ZH":"切換快速遮色片模式","Action_EN":"Quick Mask Mode","Windows":"Q","macOS":"Q","Notes":"開啟/關閉快速遮色片"},
+        {"Category":"Layers","Subcategory":"Creation","Action_ZH":"新增空白圖層","Action_EN":"New Layer","Windows":"Ctrl + Shift + N","macOS":"Cmd + Shift + N","Notes":"跳出圖層設定視窗"},
+        {"Category":"Layers","Subcategory":"Creation","Action_ZH":"新增圖層 (跳過對話框)","Action_EN":"New Layer (Bypass Dialog)","Windows":"Ctrl + Alt + Shift + N","macOS":"Cmd + Option + Shift + N","Notes":"直接新增圖層"},
+        {"Category":"Layers","Subcategory":"Duplication","Action_ZH":"複製選區/圖層至新圖層","Action_EN":"Layer via Copy","Windows":"Ctrl + J","macOS":"Cmd + J","Notes":"常用高頻快捷鍵"},
+        {"Category":"Layers","Subcategory":"Duplication","Action_ZH":"剪下選區至新圖層","Action_EN":"Layer via Cut","Windows":"Ctrl + Shift + J","macOS":"Cmd + Shift + J","Notes":"剪下並建立新圖層"},
+        {"Category":"Layers","Subcategory":"Masking","Action_ZH":"建立 / 解除剪裁遮色片","Action_EN":"Clipping Mask Toggle","Windows":"Ctrl + Alt + G","macOS":"Cmd + Option + G","Notes":"將上方圖層剪裁至下方圖層"},
+        {"Category":"Layers","Subcategory":"Grouping","Action_ZH":"建立圖層群組","Action_EN":"Group Layers","Windows":"Ctrl + G","macOS":"Cmd + G","Notes":"將選取圖層放入資料夾"},
+        {"Category":"Layers","Subcategory":"Grouping","Action_ZH":"解散圖層群組","Action_EN":"Ungroup Layers","Windows":"Ctrl + Shift + G","macOS":"Cmd + Shift + G","Notes":"拆開群組資料夾"},
+        {"Category":"Layers","Subcategory":"Selection","Action_ZH":"選取所有圖層","Action_EN":"Select All Layers","Windows":"Ctrl + Alt + A","macOS":"Cmd + Option + A","Notes":"不包含背景圖層"},
+        {"Category":"Layers","Subcategory":"Merging","Action_ZH":"向下合併圖層","Action_EN":"Merge Down / Merge Selected","Windows":"Ctrl + E","macOS":"Cmd + E","Notes":"合併選取圖層或向下合併"},
+        {"Category":"Layers","Subcategory":"Merging","Action_ZH":"合併所有可見圖層","Action_EN":"Merge Visible","Windows":"Ctrl + Shift + E","macOS":"Cmd + Shift + E","Notes":"僅合併眼睛開啟的圖層"},
+        {"Category":"Layers","Subcategory":"Merging","Action_ZH":"蓋印所有圖層 (合並且保留原圖層)","Action_EN":"Stamp Visible","Windows":"Ctrl + Alt + Shift + E","macOS":"Cmd + Option + Shift + E","Notes":"生成包含全部畫面的新圖層"},
+        {"Category":"Layers","Subcategory":"Arrangement","Action_ZH":"圖層移至最上層","Action_EN":"Bring to Front","Windows":"Ctrl + Shift + ]","macOS":"Cmd + Shift + ]","Notes":"移至圖層堆疊最頂部"},
+        {"Category":"Layers","Subcategory":"Arrangement","Action_ZH":"圖層移至最下層","Action_EN":"Send to Back","Windows":"Ctrl + Shift + [","macOS":"Cmd + Shift + [","Notes":"移至圖層堆疊最底部"},
+        {"Category":"Layers","Subcategory":"Arrangement","Action_ZH":"圖層向上移動一層","Action_EN":"Bring Forward","Windows":"Ctrl + ]","macOS":"Cmd + ]","Notes":"向上移一層"},
+        {"Category":"Layers","Subcategory":"Arrangement","Action_ZH":"圖層向下移動一層","Action_EN":"Send Backward","Windows":"Ctrl + [","macOS":"Cmd + [","Notes":"向下移一層"},
+        {"Category":"Selections","Subcategory":"General","Action_ZH":"全選 (Select All)","Action_EN":"Select All","Windows":"Ctrl + A","macOS":"Cmd + A","Notes":"選取整個畫布"},
+        {"Category":"Selections","Subcategory":"General","Action_ZH":"取消選取","Action_EN":"Deselect","Windows":"Ctrl + D","macOS":"Cmd + D","Notes":"清除現有選取區"},
+        {"Category":"Selections","Subcategory":"General","Action_ZH":"重新選取","Action_EN":"Reselect","Windows":"Ctrl + Shift + D","macOS":"Cmd + Shift + D","Notes":"恢復上一次的選取區"},
+        {"Category":"Selections","Subcategory":"General","Action_ZH":"反轉選取","Action_EN":"Inverse Selection","Windows":"Ctrl + Shift + I","macOS":"Cmd + Shift + I","Notes":"反轉目前選取的範圍"},
+        {"Category":"Selections","Subcategory":"Modification","Action_ZH":"羽化選取區","Action_EN":"Feather Selection","Windows":"Shift + F6","macOS":"Shift + F6","Notes":"平滑選取邊緣"},
+        {"Category":"Selections","Subcategory":"Workspace","Action_ZH":"開啟「選取並遮住」工作區","Action_EN":"Select and Mask","Windows":"Ctrl + Alt + R","macOS":"Cmd + Option + R","Notes":"進行去背與髮絲縫細細修"},
+        {"Category":"Adjustments","Subcategory":"Transform","Action_ZH":"自由變形 (Transform)","Action_EN":"Free Transform","Windows":"Ctrl + T","macOS":"Cmd + T","Notes":"縮放、旋轉、傾斜"},
+        {"Category":"Adjustments","Subcategory":"Color","Action_ZH":"負片效果 (色彩反轉)","Action_EN":"Invert Colors","Windows":"Ctrl + I","macOS":"Cmd + I","Notes":"反轉顏色"},
+        {"Category":"Adjustments","Subcategory":"Color","Action_ZH":"去色 (黑白)","Action_EN":"Desaturate","Windows":"Ctrl + Shift + U","macOS":"Cmd + Shift + U","Notes":"移除彩度"},
+        {"Category":"Adjustments","Subcategory":"Tone & Color","Action_ZH":"調整「色階」(Levels)","Action_EN":"Levels","Windows":"Ctrl + L","macOS":"Cmd + L","Notes":"調整明暗基調"},
+        {"Category":"Adjustments","Subcategory":"Tone & Color","Action_ZH":"調整「曲線」(Curves)","Action_EN":"Curves","Windows":"Ctrl + M","macOS":"Cmd + M","Notes":"精確控制對比與色彩"},
+        {"Category":"Adjustments","Subcategory":"Tone & Color","Action_ZH":"調整「色相/飽和度」","Action_EN":"Hue/Saturation","Windows":"Ctrl + U","macOS":"Cmd + U","Notes":"調整色彩屬性"},
+        {"Category":"Adjustments","Subcategory":"Tone & Color","Action_ZH":"調整「色彩平衡」","Action_EN":"Color Balance","Windows":"Ctrl + B","macOS":"Cmd + B","Notes":"調整陰影/中間調/高光色彩"},
+        {"Category":"Adjustments","Subcategory":"Filter","Action_ZH":"開啟 Camera Raw 濾鏡","Action_EN":"Camera Raw Filter","Windows":"Ctrl + Shift + A","macOS":"Cmd + Shift + A","Notes":"修圖調色核心工具"},
+        {"Category":"Adjustments","Subcategory":"Fill","Action_ZH":"填滿前景顏色","Action_EN":"Fill with Foreground Color","Windows":"Alt + Backspace","macOS":"Option + Delete","Notes":"快速填滿"},
+        {"Category":"Adjustments","Subcategory":"Fill","Action_ZH":"填滿背景顏色","Action_EN":"Fill with Background Color","Windows":"Ctrl + Backspace","macOS":"Cmd + Delete","Notes":"快速填滿"},
+        {"Category":"Adjustments","Subcategory":"Fill","Action_ZH":"開啟「填滿」對話框","Action_EN":"Fill Dialog","Windows":"Shift + F5","macOS":"Shift + F5","Notes":"可選擇內容感知填滿等"},
+        {"Category":"View","Subcategory":"Zoom","Action_ZH":"放大顯示","Action_EN":"Zoom In","Windows":"Ctrl + +","macOS":"Cmd + +","Notes":"放大畫布"},
+        {"Category":"View","Subcategory":"Zoom","Action_ZH":"縮小顯示","Action_EN":"Zoom Out","Windows":"Ctrl + -","macOS":"Cmd + -","Notes":"縮小畫布"},
+        {"Category":"View","Subcategory":"Zoom","Action_ZH":"縮放至適合螢幕","Action_EN":"Fit on Screen","Windows":"Ctrl + 0","macOS":"Cmd + 0","Notes":"畫布完整顯示於視窗內"},
+        {"Category":"View","Subcategory":"Zoom","Action_ZH":"縮放至 100% 實際像素","Action_EN":"100% Zoom / Actual Pixels","Windows":"Ctrl + 1","macOS":"Cmd + 1","Notes":"等比例 100% 檢視"},
+        {"Category":"View","Subcategory":"Navigation","Action_ZH":"臨時切換抓手工具","Action_EN":"Temporary Hand Tool","Windows":"Space","macOS":"Space","Notes":"按住空白鍵可拖拽畫布"},
+        {"Category":"View","Subcategory":"Screen Mode","Action_ZH":"切換螢幕顯示模式","Action_EN":"Toggle Screen Mode","Windows":"F","macOS":"F","Notes":"標準/全螢幕帶選單/全螢幕"},
+        {"Category":"View","Subcategory":"Guides & Grids","Action_ZH":"顯示/隱藏參考線","Action_EN":"Show/Hide Guides","Windows":"Ctrl + ;","macOS":"Cmd + ;","Notes":"開關參考線"},
+        {"Category":"View","Subcategory":"Guides & Grids","Action_ZH":"顯示/隱藏尺規","Action_EN":"Show/Hide Rulers","Windows":"Ctrl + R","macOS":"Cmd + R","Notes":"開關邊框尺規"},
+        {"Category":"Brush","Subcategory":"Size & Hardness","Action_ZH":"縮小筆刷尺寸","Action_EN":"Decrease Brush Size","Windows":"[","macOS":"[","Notes":"縮小筆刷頭"},
+        {"Category":"Brush","Subcategory":"Size & Hardness","Action_ZH":"放大筆刷尺寸","Action_EN":"Increase Brush Size","Windows":"]","macOS":"]","Notes":"放大筆刷頭"},
+        {"Category":"Brush","Subcategory":"Size & Hardness","Action_ZH":"降低筆刷硬度","Action_EN":"Decrease Brush Hardness","Windows":"Shift + [","macOS":"Shift + [","Notes":"羽化筆刷邊緣"},
+        {"Category":"Brush","Subcategory":"Size & Hardness","Action_ZH":"增加筆刷硬度","Action_EN":"Increase Brush Hardness","Windows":"Shift + ]","macOS":"Shift + ]","Notes":"讓筆刷邊緣銳利"},
+        {"Category":"Brush","Subcategory":"Opacity","Action_ZH":"切換筆刷不透明度 (10%~100%)","Action_EN":"Brush Opacity (10%-100%)","Windows":"1 ~ 0","macOS":"1 ~ 0","Notes":"按 1 表示 10%，按 0 表示 100%"},
+        {"Category":"Brush","Subcategory":"Dynamic Adjustment","Action_ZH":"動態調整筆刷 (尺寸/硬度)","Action_EN":"Dynamic Brush Resize/Hardness","Windows":"Alt + Right Click Drag","macOS":"Cmd + Option + Left Click Drag","Notes":"左右拖動調大小，上下拖動調硬度"},
+        {"Category":"System","Subcategory":"File Management","Action_ZH":"開新檔案","Action_EN":"New File","Windows":"Ctrl + N","macOS":"Cmd + N","Notes":"建立新文件"},
+        {"Category":"System","Subcategory":"File Management","Action_ZH":"開啟舊檔","Action_EN":"Open File","Windows":"Ctrl + O","macOS":"Cmd + O","Notes":"載入圖檔"},
+        {"Category":"System","Subcategory":"File Management","Action_ZH":"儲存檔案","Action_EN":"Save File","Windows":"Ctrl + S","macOS":"Cmd + S","Notes":"儲存專案"},
+        {"Category":"System","Subcategory":"File Management","Action_ZH":"另存新檔","Action_EN":"Save As","Windows":"Ctrl + Shift + S","macOS":"Cmd + Shift + S","Notes":"另存其他格式或路徑"},
+        {"Category":"System","Subcategory":"Export","Action_ZH":"轉存為 Web 格式 (舊版)","Action_EN":"Save for Web (Legacy)","Windows":"Ctrl + Alt + Shift + S","macOS":"Cmd + Option + Shift + S","Notes":"最適Web壓縮匯出"},
+        {"Category":"System","Subcategory":"History","Action_ZH":"還原 (Undo)","Action_EN":"Undo","Windows":"Ctrl + Z","macOS":"Cmd + Z","Notes":"復原上一動作"},
+        {"Category":"System","Subcategory":"History","Action_ZH":"重做 (Redo)","Action_EN":"Redo","Windows":"Ctrl + Shift + Z","macOS":"Cmd + Shift + Z","Notes":"重做復原的動作"},
+        {"Category":"System","Subcategory":"Preferences","Action_ZH":"偏好設定 (Preferences)","Action_EN":"Preferences","Windows":"Ctrl + K","macOS":"Cmd + K","Notes":"開啟系統設定面板"},
+        {"Category":"System","Subcategory":"Preferences","Action_ZH":"自訂鍵盤快速鍵","Action_EN":"Keyboard Shortcuts Menu","Windows":"Ctrl + Alt + Shift + K","macOS":"Cmd + Option + Shift + K","Notes":"自訂或查看快捷鍵"}
+    ];
+
+    createApp({
+        setup() {
+            const searchQuery = ref('');
+            const shortcuts = ref(rawShortcuts);
+            
+            const totalShortcuts = computed(() => shortcuts.value.length);
+            const categories = [...new Set(rawShortcuts.map(i => i.Category))];
+
+            const filteredGroups = computed(() => {
+                const q = searchQuery.value.toLowerCase().trim();
+                const filtered = shortcuts.value.filter(item => {
+                    return item.Action_ZH.toLowerCase().includes(q) ||
+                           item.Action_EN.toLowerCase().includes(q) ||
+                           item.Windows.toLowerCase().includes(q) ||
+                           item.Category.toLowerCase().includes(q);
+                });
+
+                return filtered.reduce((groups, item) => {
+                    if (!groups[item.Category]) groups[item.Category] = [];
+                    groups[item.Category].push(item);
+                    return groups;
+                }, {});
+            });
+
+            const parseKeys = (str) => str.split('+').map(k => k.trim());
+
+            return { searchQuery, categories, filteredGroups, parseKeys, totalShortcuts };
+        }
+    }).mount('#app');
+</script>
+
+</body>
+</html>
