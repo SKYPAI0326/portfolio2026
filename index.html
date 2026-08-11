@@ -20,7 +20,6 @@
                         black: ['Montserrat', 'Noto Sans TC', 'sans-serif'], 
                     },
                     colors: {
-                        /* 1. 使用 CSS 變數重構硬編碼顏色 */
                         brandYellow: 'var(--color-brand-yellow)', 
                         brandBlack: 'var(--color-brand-black)',  
                         brandWhite: 'var(--color-brand-white)',  
@@ -29,6 +28,16 @@
                         '4xl': '2.5rem',
                         '5xl': '3.5rem',
                         'blob': '40% 60% 70% 30% / 40% 50% 60% 50%', 
+                    },
+                    keyframes: {
+                        shake: {
+                            '0%, 100%': { transform: 'rotate(0deg)' },
+                            '25%': { transform: 'rotate(-5deg)' },
+                            '75%': { transform: 'rotate(5deg)' },
+                        }
+                    },
+                    animation: {
+                        'shake-hover': 'shake 0.3s ease-in-out',
                     }
                 }
             }
@@ -109,7 +118,7 @@
                 <div class="w-full lg:w-1/2 text-left z-20">
                     <h1 class="text-6xl md:text-8xl lg:text-[110px] font-black leading-[0.85] tracking-tighter mb-8 uppercase">
                         Design<br>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brandBlack to-gray-500">& Tech.</span>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brandBlack via-brandYellow to-gray-500">& Tech.</span>
                     </h1>
                     
                     <p class="text-lg md:text-xl text-gray-600 max-w-md mb-10 font-medium leading-relaxed border-l-4 border-brandYellow pl-6">
@@ -244,48 +253,48 @@
             </div>
         </section>
 
-        <section id="skills" class="w-full py-24 px-6 md:px-12 bg-brandWhite">
+        <section id="skills" class="w-full py-24 px-6 md:px-12 bg-[var(--color-brand-white)]">
             <div class="max-w-7xl mx-auto">
                 <h2 class="text-5xl font-black uppercase tracking-tighter mb-16 text-center">Core<br>Competencies</h2>
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <article class="bg-white p-10 rounded-[30px] border-2 border-gray-100 hover:border-brandYellow hover:bg-brandYellow hover:shadow-xl hover:-translate-y-4 transform transition-all duration-300 group">
-                        <div class="text-5xl font-black text-gray-200 group-hover:text-brandBlack transition-colors mb-6">01</div>
+                    <article class="bg-white p-10 rounded-[30px] border-2 border-gray-100 hover:border-[var(--color-brand-yellow)] hover:bg-[var(--color-brand-yellow)] hover:shadow-xl hover:animate-[shake_0.5s_ease-in-out] transform transition-all duration-300 group">
+                        <div class="text-5xl font-black text-gray-200 group-hover:text-[var(--color-brand-black)] transition-colors mb-6">01</div>
                         <h3 class="text-2xl font-bold mb-4 uppercase tracking-wide">專業軟體應用</h3>
                         <p class="text-gray-600 group-hover:text-black/80 font-medium transition-colors">
                             精通 Adobe Illustrator、Adobe Photoshop、Adobe InDesign 與 Adobe Premiere Pro 等主流設計軟體。
                         </p>
                     </article>
 
-                    <article class="bg-white p-10 rounded-[30px] border-2 border-gray-100 hover:border-brandYellow hover:bg-brandYellow hover:shadow-xl hover:-translate-y-4 transform transition-all duration-300 group">
-                        <div class="text-5xl font-black text-gray-200 group-hover:text-brandBlack transition-colors mb-6">02</div>
+                    <article class="bg-white p-10 rounded-[30px] border-2 border-gray-100 hover:border-[var(--color-brand-yellow)] hover:bg-[var(--color-brand-yellow)] hover:shadow-xl hover:animate-[shake_0.5s_ease-in-out] transform transition-all duration-300 group">
+                        <div class="text-5xl font-black text-gray-200 group-hover:text-[var(--color-brand-black)] transition-colors mb-6">02</div>
                         <h3 class="text-2xl font-bold mb-4 uppercase tracking-wide">視覺與平面設計</h3>
                         <p class="text-gray-600 group-hover:text-black/80 font-medium transition-colors">
                             擅長各類文宣、指導手冊、宣傳海報及網頁 Banner 設計，準確傳達品牌與活動價值。
                         </p>
                     </article>
 
-                    <article class="bg-white p-10 rounded-[30px] border-2 border-gray-100 hover:border-brandYellow hover:bg-brandYellow hover:shadow-xl hover:-translate-y-4 transform transition-all duration-300 group">
-                        <div class="text-5xl font-black text-gray-200 group-hover:text-brandBlack transition-colors mb-6">03</div>
+                    <article class="bg-white p-10 rounded-[30px] border-2 border-gray-100 hover:border-[var(--color-brand-yellow)] hover:bg-[var(--color-brand-yellow)] hover:shadow-xl hover:animate-[shake_0.5s_ease-in-out] transform transition-all duration-300 group">
+                        <div class="text-5xl font-black text-gray-200 group-hover:text-[var(--color-brand-black)] transition-colors mb-6">03</div>
                         <h3 class="text-2xl font-bold mb-4 uppercase tracking-wide">社群行銷與經營</h3>
                         <p class="text-gray-600 font-medium leading-relaxed group-hover:text-black/80 transition-colors">
                             具備臉書（Facebook）粉絲專頁與微信公眾號的視覺設計、圖文排版與實務經營能力。
                         </p>
                     </article>
 
-                    <article class="bg-white p-10 rounded-[30px] border-2 border-gray-100 hover:border-brandYellow hover:bg-brandYellow hover:shadow-xl hover:-translate-y-4 transform transition-all duration-300 group">
-                        <div class="text-5xl font-black text-gray-200 group-hover:text-brandBlack transition-colors mb-6">04</div>
+                    <article class="bg-white p-10 rounded-[30px] border-2 border-gray-100 hover:border-[var(--color-brand-yellow)] hover:bg-[var(--color-brand-yellow)] hover:shadow-xl hover:animate-[shake_0.5s_ease-in-out] transform transition-all duration-300 group">
+                        <div class="text-5xl font-black text-gray-200 group-hover:text-[var(--color-brand-black)] transition-colors mb-6">04</div>
                         <h3 class="text-2xl font-bold mb-4 uppercase tracking-wide">攝影與活動策劃</h3>
                         <p class="text-gray-600 font-medium leading-relaxed group-hover:text-black/80 transition-colors">
-                            擁有活動紀錄、婚攝及商攝專業；並能企劃與主持團康活動、團體動力營及未婚聯誼。
+                            擁有活動紀錄、婚禮攝影及商品攝影專業；並能企劃與主持團康活動、團體動力營及未婚聯誼。
                         </p>
                     </article>
 
-                    <article class="bg-white p-10 rounded-[30px] border-2 border-gray-100 hover:border-brandYellow hover:bg-brandYellow hover:shadow-xl hover:-translate-y-4 transform transition-all duration-300 group">
-                        <div class="text-5xl font-black text-gray-200 group-hover:text-brandBlack transition-colors mb-6">05</div>
+                    <article class="bg-white p-10 rounded-[30px] border-2 border-gray-100 hover:border-[var(--color-brand-yellow)] hover:bg-[var(--color-brand-yellow)] hover:shadow-xl hover:animate-[shake_0.5s_ease-in-out] transform transition-all duration-300 group">
+                        <div class="text-5xl font-black text-gray-200 group-hover:text-[var(--color-brand-black)] transition-colors mb-6">05</div>
                         <h3 class="text-2xl font-bold mb-4 uppercase tracking-wide">資訊與設計教學</h3>
                         <p class="text-gray-600 font-medium leading-relaxed group-hover:text-black/80 transition-colors">
-                            長期投入 TQC+、ACA 證照研習；近期跨足教授 AI 行政自動化與高效工作流（Gemini、Make、n8n）。
+                            長期投入 TQC+、ACA 等平面設計證照研習授課；近期更跨足 AI 科技應用，教授 AI 行政自動化與高效工作流（包含 Gemini、Make、n8n 等工具應用）實戰課程。
                         </p>
                     </article>
                 </div>
