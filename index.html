@@ -67,12 +67,28 @@
         
         .marquee-content {
             display: inline-block;
-            animation: marquee 20s linear infinite;
         }
         
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+        /* 建立不規則的抖動與左右平移軌跡 */
+        @keyframes erratic-marquee {
+          0%   { transform: translate(-25%, 0px); }
+          15%  { transform: translate(-32%, -8px); }
+          30%  { transform: translate(-15%, 5px); }
+          45%  { transform: translate(-38%, -3px); }
+          60%  { transform: translate(-20%, 12px); }
+          75%  { transform: translate(-45%, -6px); }
+          90%  { transform: translate(-12%, 4px); }
+          100% { transform: translate(-25%, 0px); }
+        }
+
+        /* 將動畫掛載到 marquee-content 上 */
+        .animate-erratic {
+          /* 持續時間 6秒，時間函數用 ease-in-out 讓轉折平滑，無限循環 */
+          animation: erratic-marquee 6s ease-in-out infinite;
+          
+          /* 確保沒有掛載動畫時的起始位置一致，防止閃爍 */
+          transform: translateX(-25%);
+          will-change: transform; /* 提示瀏覽器啟動 GPU 加速 */
         }
 
         .crosshair {
@@ -176,7 +192,8 @@
 
         <div class="w-full bg-brandBlack text-brandWhite py-4 overflow-hidden border-y border-gray-800 z-20 relative">
             <div class="marquee-container text-6xl md:text-8xl font-black tracking-tighter uppercase opacity-90">
-                <div class="marquee-content flex gap-8">
+                <div class="marquee-content flex gap-8 animate-erratic">
+                    <span>about.</span><span>about.</span><span>about.</span><span>about.</span><span>about.</span>
                     <span>about.</span><span>about.</span><span>about.</span><span>about.</span><span>about.</span>
                     <span>about.</span><span>about.</span><span>about.</span><span>about.</span><span>about.</span>
                 </div>
