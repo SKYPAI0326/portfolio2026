@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>打地鼠遊戲</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #fdfbf7; /* 米白色底 */
+      font-family: 'Inter', sans-serif;
+      touch-action: manipulation; /* 改善觸控體驗 */
+    }
+    
+    .hole {
+      background-color: #4a4a4a; /* 深灰色地洞 */
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mole {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 3rem; /* 放大 emoji */
+      cursor: pointer;
+      transition: top 0.1s ease-out; /* 快速冒出的動畫 */
+      user-select: none; /* 防止反白 */
+      -webkit-tap-highlight-color: transparent; /* 移除手機點擊閃爍 */
+    }
+
+    /* 地鼠冒出的狀態 */
+    .hole.up .mole {
+      top: 0;
+    }
+    
+    @media (max-width: 640px) {
+      .mole {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen text-gray-800">
+
+  <div class="w-full max-w-md p-6 bg-white rounded-2xl shadow-xl flex flex-col items-center gap-6">
+    <h1 class="text-3xl font-bold text-center">打地鼠</h1>
+    
+    <div class="flex justify-between w-full text-lg font-semibold px-4">
+      <div class="flex flex-col items-center">
+        <span class="text-gray-500 text-sm">分數</span>
+        <span id="scoreDisplay" class="text-2xl text-blue-600">0</span>
+      </div>
+      <div class="flex flex-col items-center">
+        <span class="text-gray-500 text-sm">時間</span>
+        <span id="timeDisplay" class="text-2xl text-red-500">60s</span>
+      </div>
+      <div class="flex flex-col items-center">
+        <span class="text-gray-500 text-sm">最高分</span>
+        <span id="highScoreDisplay" class="text-2xl text-orange-500">0</span>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-3 gap-4 w-full aspect-square p-4 bg-gray-100 rounded-xl">
+      <!-- 產生 9 個地洞 -->
+      <div class="hole rounded-full w-full h-full shadow-inner" data-index="0"><div class="mole">🐹</div></div>
+      <div class="hole rounded-full w-full h-full shadow-inner" data-index="1"><div class="mole">🐹</div></div>
+      <div class="hole rounded-full w-full h-full shadow-inner" data-index="2"><div class="mole">🐹</div></div>
+      <div class="hole rounded-full w-full h-full shadow-inner" data-index="3"><div class="mole">🐹</div></div>
+      <div class="hole rounded-full w-full h-full shadow-inner" data-index="4"><div class="mole">🐹</div></div>
+      <div class="hole rounded-full w-full h-full shadow-inner" data-index="5"><div class="mole">🐹</div></div>
+      <div class="hole rounded-full w-full h-full shadow-inner" data-index="6"><div class="mole">🐹</div></div>
+      <div class="hole rounded-full w-full h-full shadow-inner" data-index="7"><div class="mole">🐹</div></div>
+      <div class="hole rounded-full w-full h-full shadow-inner" data-index="8"><div class="mole">🐹</div></div>
+    </div>
+
+    <button id="startBtn" class="w-full py-3 mt-2 bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-bold rounded-lg text-xl transition-colors shadow-md">
+      開始遊戲
+    </button>
+  </div>
+
+  <script>
+    // 獲取 DOM 元素
+    const holes = document.querySelectorAll('.hole');
+    const scoreDisplay = document.getElementById('scoreDisplay');
+    const timeDisplay = document.getElementById('timeDisplay');
+    const highScoreDisplay = document.getElementById('highScoreDisplay');
+    const startBtn = document.getElementById('startBtn');
+
+    // 遊戲狀態變數
+    let lastHole;
+    let timeUp = false;
+    let score = 0;
+    let gameTime = 60; // 遊戲時間 60 秒
+    let countdownInterval;
+    let moleTimer;
+    let highScore = localStorage.getItem('whackAMoleHighScore') || 0;
+
+    // 初始化最高分顯示
+    highScoreDisplay.textContent = highScore;
+
+    // 隨機生成介於 min 和 max 之間的時間 (豪秒)
+    function randomTime(min, max) {
+      return Math.round(Math.random() * (max - min) + min);
+    }
+
+    // 從 holes 陣列中隨機選擇一個地洞
+    function randomHole(holes) {
+      const idx = Math.floor(Math.random() * holes.length);
+      const hole = holes[idx];
+      
+      // 避免連續兩次出現在同一個地洞
+      if (hole === lastHole) {
+        return randomHole(holes);
+      }
+      lastHole = hole;
+      return hole;
+    }
+
+    // 讓地鼠探出頭
+    function peep() {
+      const time = 1000; // 固定出現 1 秒，根據需求設定
+      const hole = randomHole(holes);
+      
+      // 加入 'up' class 讓 CSS 動畫生效
+      hole.classList.add('up');
+      
+      // 設定計時器，時間到就縮回去，並決定下一次出現
+      moleTimer = setTimeout(() => {
+        hole.classList.remove('up');
+        if (!timeUp) {
+            // 縮回去後，再隨機等待一小段時間才出現下一隻，增加節奏感
+            setTimeout(peep, randomTime(200, 800)); 
+        }
+      }, time);
+    }
+
+    // 開始遊戲主函式
+    function startGame() {
+      // 重置遊戲狀態
+      scoreDisplay.textContent = 0;
+      timeUp = false;
+      score = 0;
+      gameTime = 60;
+      timeDisplay.textContent = `${gameTime}s`;
+      startBtn.disabled = true;
+      startBtn.textContent = '遊戲進行中...';
+      startBtn.classList.replace('bg-blue-500', 'bg-gray-400');
+      startBtn.classList.replace('hover:bg-blue-600', 'hover:bg-gray-400');
+
+      // 隱藏所有可能還在外面的地鼠
+      holes.forEach(hole => hole.classList.remove('up'));
+      
+      // 開始地鼠循環
+      peep();
+      
+      // 開始倒數計時
+      clearInterval(countdownInterval);
+      countdownInterval = setInterval(() => {
+        gameTime--;
+        timeDisplay.textContent = `${gameTime}s`;
+        
+        if (gameTime <= 0) {
+          endGame();
+        }
+      }, 1000);
+    }
+
+    // 結束遊戲處理
+    function endGame() {
+      clearInterval(countdownInterval);
+      clearTimeout(moleTimer);
+      timeUp = true;
+      
+      // 確保最後一隻地鼠也縮回去
+      holes.forEach(hole => hole.classList.remove('up'));
+
+      // 更新最高分
+      if (score > highScore) {
+        highScore = score;
+        localStorage.setItem('whackAMoleHighScore', highScore);
+        highScoreDisplay.textContent = highScore;
+      }
+
+      // 恢復按鈕狀態
+      startBtn.disabled = false;
+      startBtn.textContent = '再玩一次';
+      startBtn.classList.replace('bg-gray-400', 'bg-blue-500');
+      startBtn.classList.replace('hover:bg-gray-400', 'hover:bg-blue-600');
+      
+      // 顯示總分
+      setTimeout(() => {
+          alert(`時間到！\n您的總分是：${score} 分`);
+      }, 100);
+    }
+
+    // 處理打擊地鼠的動作 (支援點擊與觸控)
+    function bonk(e) {
+      // 確保不是程式觸發的假事件
+      if(!e.isTrusted) return; 
+      
+      // 檢查是否真的打到地鼠 (父元素是否有 'up' class)
+      if (this.parentElement.classList.contains('up')) {
+        score++;
+        scoreDisplay.textContent = score;
+        
+        // 打到後立刻縮回去
+        this.parentElement.classList.remove('up');
+        
+        // 可以在這裡加入打擊特效或音效
+      }
+    }
+
+    // 為每一隻地鼠綁定事件 (click 和 touchstart 都綁，適應手機與電腦)
+    const moles = document.querySelectorAll('.mole');
+    moles.forEach(mole => {
+        // 使用 pointerdown 可以同時處理滑鼠和觸控，且反應更快
+        mole.addEventListener('pointerdown', bonk);
+    });
+
+    // 綁定開始按鈕
+    startBtn.addEventListener('click', startGame);
+
+  </script>
+</body>
+</html>
