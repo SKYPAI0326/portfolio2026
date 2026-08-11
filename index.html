@@ -20,9 +20,10 @@
                         black: ['Montserrat', 'Noto Sans TC', 'sans-serif'], 
                     },
                     colors: {
-                        brandYellow: '#F9A826', 
-                        brandBlack: '#0A0A0A',  
-                        brandWhite: '#F4F4F4',  
+                        /* 1. 使用 CSS 變數重構硬編碼顏色 */
+                        brandYellow: 'var(--color-brand-yellow)', 
+                        brandBlack: 'var(--color-brand-black)',  
+                        brandWhite: 'var(--color-brand-white)',  
                     },
                     borderRadius: {
                         '4xl': '2.5rem',
@@ -35,9 +36,16 @@
     </script>
     
     <style>
+        /* 1. 建立 :root 存放全域 CSS 變數 */
+        :root {
+            --color-brand-yellow: #F9A826;
+            --color-brand-black: #0A0A0A;
+            --color-brand-white: #F4F4F4;
+        }
+
         body {
-            background-color: theme('colors.brandWhite');
-            color: theme('colors.brandBlack');
+            background-color: var(--color-brand-white);
+            color: var(--color-brand-black);
             overflow-x: hidden;
         }
 
@@ -60,21 +68,24 @@
 
         .crosshair {
             position: relative;
-            width: 24px;
-            height: 24px;
+            /* 3. 將 px 轉為 rem (1.5rem = 24px) */
+            width: 1.5rem;
+            height: 1.5rem;
         }
         .crosshair::before, .crosshair::after {
             content: '';
             position: absolute;
             background-color: currentColor;
         }
-        .crosshair::before { top: 50%; left: 0; width: 100%; height: 1px; transform: translateY(-50%); }
-        .crosshair::after { left: 50%; top: 0; height: 100%; width: 1px; transform: translateX(-50%); }
+        /* 3. 將 px 轉為 rem (0.0625rem = 1px) */
+        .crosshair::before { top: 50%; left: 0; width: 100%; height: 0.0625rem; transform: translateY(-50%); }
+        .crosshair::after { left: 50%; top: 0; height: 100%; width: 0.0625rem; transform: translateX(-50%); }
 
         .shape-image {
-            border-radius: 40px;
-            border-top-left-radius: 120px;
-            border-bottom-right-radius: 120px;
+            /* 3. 將 px 轉為 rem (2.5rem = 40px, 7.5rem = 120px) */
+            border-radius: 2.5rem;
+            border-top-left-radius: 7.5rem;
+            border-bottom-right-radius: 7.5rem;
         }
     </style>
 </head>
