@@ -3,14 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>王小明 Xiaoming Wang | 資深數位行銷</title>
+    <title>白辰幃老師 | 弄一下工作室執行長</title>
     
-    <!-- 引入 Google Fonts: 使用更具現代感、更粗的字體搭配 (Montserrat for bold headers, Noto Sans TC for body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
     
-    <!-- 引入 Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script>
@@ -19,17 +17,17 @@
                 extend: {
                     fontFamily: {
                         sans: ['Montserrat', 'Noto Sans TC', 'sans-serif'],
-                        black: ['Montserrat', 'Noto Sans TC', 'sans-serif'], // For ultra bold text
+                        black: ['Montserrat', 'Noto Sans TC', 'sans-serif'], 
                     },
                     colors: {
-                        brandYellow: '#F9A826', // 從圖片提取的橘黃色
-                        brandBlack: '#0A0A0A',  // 深邃黑
-                        brandWhite: '#F4F4F4',  // 圖片中的淺灰/米白背景
+                        brandYellow: '#F9A826', 
+                        brandBlack: '#0A0A0A',  
+                        brandWhite: '#F4F4F4',  
                     },
                     borderRadius: {
                         '4xl': '2.5rem',
                         '5xl': '3.5rem',
-                        'blob': '40% 60% 70% 30% / 40% 50% 60% 50%', // 不規則形狀
+                        'blob': '40% 60% 70% 30% / 40% 50% 60% 50%', 
                     }
                 }
             }
@@ -43,7 +41,6 @@
             overflow-x: hidden;
         }
 
-        /* 巨型跑馬燈動畫 */
         .marquee-container {
             overflow: hidden;
             white-space: nowrap;
@@ -61,7 +58,6 @@
             100% { transform: translateX(-50%); }
         }
 
-        /* 裝飾性十字準星 (Crosshair) */
         .crosshair {
             position: relative;
             width: 24px;
@@ -75,7 +71,6 @@
         .crosshair::before { top: 50%; left: 0; width: 100%; height: 1px; transform: translateY(-50%); }
         .crosshair::after { left: 50%; top: 0; height: 100%; width: 1px; transform: translateX(-50%); }
 
-        /* 特殊形狀的圖片容器 */
         .shape-image {
             border-radius: 40px;
             border-top-left-radius: 120px;
@@ -86,305 +81,331 @@
 <body class="antialiased selection:bg-brandYellow selection:text-black">
 
     <nav class="w-full px-6 py-6 md:px-12 flex justify-between items-center z-50 relative">
-        <div class="text-2xl font-black tracking-tighter">XMW.</div>
+        <div class="text-2xl font-black tracking-tighter">BCW.</div>
         <div class="hidden md:flex space-x-8 text-sm font-bold uppercase tracking-widest">
             <a href="#home" class="hover:text-brandYellow transition">Home</a>
             <a href="#about" class="hover:text-brandYellow transition">About</a>
             <a href="#skills" class="hover:text-brandYellow transition">Skills</a>
             <a href="#works" class="hover:text-brandYellow transition">Portfolio</a>
         </div>
-        <a href="mailto:xm.wang@example.com" class="hidden md:inline-flex items-center space-x-2 text-sm font-bold">
-            <span class="w-2 h-2 rounded-full bg-brandYellow"></span>
-            <span>Let's Talk</span>
-        </a>
     </nav>
 
-    <header id="home" class="w-full pt-10 pb-20 px-6 md:px-12 relative">
-        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 relative z-10">
-            
-            <!-- Left Text Content -->
-            <div class="w-full lg:w-1/2 text-left z-20">
-                <h1 class="text-6xl md:text-8xl lg:text-[110px] font-black leading-[0.85] tracking-tighter mb-8 uppercase">
-                    digital<br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brandBlack to-gray-500">marketer</span>
-                </h1>
+    <!-- 主體內容使用 main 包覆 (Semantic HTML) -->
+    <main>
+        <header id="home" class="w-full pt-10 pb-20 px-6 md:px-12 relative">
+            <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 relative z-10">
                 
-                <p class="text-lg md:text-xl text-gray-600 max-w-md mb-10 font-medium leading-relaxed border-l-4 border-brandYellow pl-6">
-                    王小明 Xiaoming Wang. <br>
-                    自帶母嬰洞察與數據驅動的即戰力。不追求傳統管理職，專注成為帶來真實流量與營收的獨立貢獻者。
-                </p>
-                
-                <!-- Stat Numbers from image style -->
-                <div class="flex gap-12 mt-12 pt-8 border-t border-gray-200">
-                    <div>
-                        <div class="text-5xl font-black mb-1">+35%</div>
-                        <div class="text-sm font-bold text-gray-500 uppercase tracking-widest">LTV Growth</div>
-                    </div>
-                    <div>
-                        <div class="text-5xl font-black mb-1">5K+</div>
-                        <div class="text-sm font-bold text-gray-500 uppercase tracking-widest">Leads Gen</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Image Block -->
-            <div class="w-full lg:w-1/2 relative flex justify-center lg:justify-end mt-12 lg:mt-0">
-                <!-- Large Yellow Blob/Shape Background -->
-                <div class="absolute inset-0 bg-brandYellow rounded-[60px] rounded-tl-[150px] transform rotate-3 scale-105 -z-10"></div>
-                
-                <div class="relative w-full max-w-lg aspect-[4/5] bg-gray-200 rounded-[40px] rounded-tl-[120px] rounded-br-[120px] overflow-hidden shadow-2xl">
-                    <img src="https://skypai0326.github.io/portfolio2026/photo/avatar.jpg" alt="王小明 Portrait" class="w-full h-full object-cover">
+                <div class="w-full lg:w-1/2 text-left z-20">
+                    <h1 class="text-6xl md:text-8xl lg:text-[110px] font-black leading-[0.85] tracking-tighter mb-8 uppercase">
+                        Design<br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brandBlack to-gray-500">& Tech.</span>
+                    </h1>
                     
-                    <!-- Decorative element inside image block -->
-                    <div class="absolute top-6 right-6 w-12 h-12 bg-black rounded-full flex items-center justify-center text-white cursor-pointer hover:scale-110 transition-transform shadow-lg">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-    </header>
-
-    <div class="w-full bg-brandBlack text-brandWhite py-4 overflow-hidden border-y border-gray-800 z-20 relative">
-        <div class="marquee-container text-6xl md:text-8xl font-black tracking-tighter uppercase opacity-90">
-            <div class="marquee-content flex gap-8">
-                <span>about.</span><span>about.</span><span>about.</span><span>about.</span><span>about.</span>
-                <span>about.</span><span>about.</span><span>about.</span><span>about.</span><span>about.</span>
-            </div>
-        </div>
-    </div>
-
-    <section id="about" class="w-full py-24 px-6 md:px-12 bg-brandBlack text-brandWhite relative overflow-hidden">
-        
-        <!-- Background Decorations -->
-        <div class="absolute top-12 left-12 crosshair text-gray-700 opacity-50"></div>
-        <div class="absolute bottom-12 right-12 crosshair text-gray-700 opacity-50"></div>
-        
-        <div class="max-w-5xl mx-auto flex flex-col md:flex-row gap-16 relative z-10">
-            <div class="w-full md:w-1/3">
-                <h3 class="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-4">Focus &<br>Vision</h3>
-                <div class="w-16 h-2 bg-brandYellow mb-8"></div>
-            </div>
-            
-            <div class="w-full md:w-2/3 space-y-8 text-xl text-gray-300 font-medium leading-relaxed">
-                <p>
-                    我擁有超過 8 年專注於母嬰與嬰幼兒產品的電商行銷經驗。身為兩個孩子的父親，我具備目標受眾 (TA) 最真實的痛點雷達；身為一位數位行銷人，我擅長將這些痛點轉化為高轉換率的商業數據。
-                </p>
-                <p>
-                    我深知嬰幼兒電商的核心不在於單次購買，而是<span class="text-brandYellow font-bold">顧客終身價值 (LTV) 的極大化</span>。「新手父母的焦慮感」是尚未被完全變現的流量密碼，我能帶著經過市場驗證的受眾模型與 A/B 測試框架立即上線，省去所有的適應期與試錯成本。
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 實用工具 / Side Project 區塊 -->
-    <section class="w-full py-24 px-6 md:px-12 bg-brandYellow relative overflow-hidden z-20">
-        <!-- 背景裝飾文字 -->
-        <div class="absolute inset-0 opacity-10 flex justify-center items-center pointer-events-none overflow-hidden">
-            <span class="text-[120px] md:text-[250px] font-black tracking-tighter whitespace-nowrap text-brandBlack">TOOLKIT.</span>
-        </div>
-        
-        <div class="relative z-10 max-w-6xl mx-auto flex flex-col items-center justify-center space-y-12">
-            <div class="text-center">
-                <h3 class="text-4xl md:text-5xl font-black text-brandBlack uppercase tracking-tighter mb-4">Side Projects</h3>
-                <div class="w-16 h-2 bg-brandBlack mx-auto mb-4"></div>
-                <p class="text-brandBlack/80 font-bold tracking-widest uppercase text-sm">實驗室與實用工具</p>
-            </div>
-            
-            <!-- 專案按鈕網格 (Grid) -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
-                
-                <!-- 專案 1: PS 快捷鍵工具 -->
-                <a href="https://skypai0326.github.io/portfolio2026/ps-shortcut.html" target="_blank" rel="noopener noreferrer" class="group relative flex flex-col items-center justify-center p-8 bg-brandBlack text-brandWhite rounded-[30px] overflow-hidden shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 h-48">
-                    <span class="absolute inset-0 w-full h-full bg-white scale-0 group-hover:scale-110 transition-transform duration-500 ease-out origin-center rounded-[30px]"></span>
-                    <span class="relative z-10 flex flex-col items-center gap-3 group-hover:text-black transition-colors duration-300">
-                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                        <span class="font-bold text-lg text-center">PS 快捷鍵工具</span>
-                    </span>
-                </a>
-
-                <!-- 專案 2: 貪食蛇遊戲 -->
-                <a href="https://skypai0326.github.io/portfolio2026/snake.html" target="_blank" rel="noopener noreferrer" class="group relative flex flex-col items-center justify-center p-8 bg-brandBlack text-brandWhite rounded-[30px] overflow-hidden shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 h-48">
-                    <span class="absolute inset-0 w-full h-full bg-white scale-0 group-hover:scale-110 transition-transform duration-500 ease-out origin-center rounded-[30px]"></span>
-                    <span class="relative z-10 flex flex-col items-center gap-3 group-hover:text-black transition-colors duration-300">
-                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        <span class="font-bold text-lg text-center">經典貪食蛇</span>
-                    </span>
-                </a>
-
-                <!-- 專案 3: 預留空位 -->
-                <div class="group relative flex flex-col items-center justify-center p-8 bg-brandBlack/50 text-brandWhite/50 rounded-[30px] border-2 border-dashed border-brandBlack/30 h-48 cursor-not-allowed">
-                    <span class="relative z-10 flex flex-col items-center gap-3">
-                        <svg class="w-10 h-10 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
-                        <span class="font-bold text-lg text-center">Coming Soon</span>
-                    </span>
-                </div>
-
-                <!-- 專案 4: 預留空位 -->
-                <div class="group relative flex flex-col items-center justify-center p-8 bg-brandBlack/50 text-brandWhite/50 rounded-[30px] border-2 border-dashed border-brandBlack/30 h-48 cursor-not-allowed">
-                    <span class="relative z-10 flex flex-col items-center gap-3">
-                        <svg class="w-10 h-10 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
-                        <span class="font-bold text-lg text-center">Coming Soon</span>
-                    </span>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="skills" class="w-full py-24 px-6 md:px-12 bg-brandWhite">
-        <div class="max-w-7xl mx-auto">
-            <h3 class="text-5xl font-black uppercase tracking-tighter mb-16 text-center">Core<br>Competencies</h3>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                
-                <!-- Skill Card 1 -->
-                <div class="bg-white p-10 rounded-[30px] border-2 border-gray-100 hover:border-brandYellow hover:bg-brandYellow hover:shadow-xl hover:-translate-y-4 transform transition-all duration-300 group cursor-pointer">
-                    <div class="text-5xl font-black text-gray-200 group-hover:text-brandBlack transition-colors mb-6">01</div>
-                    <h4 class="text-2xl font-bold mb-4 uppercase tracking-wide">LTV 優化與 CRM</h4>
-                    <p class="text-gray-600 group-hover:text-black/80 font-medium transition-colors">
-                        擅長導入 CRM 自動化標籤系統，針對會員輪廓進行精細化分群與個人化再行銷，推升經常性營收與顧客終身價值。
+                    <p class="text-lg md:text-xl text-gray-600 max-w-md mb-10 font-medium leading-relaxed border-l-4 border-brandYellow pl-6">
+                        白辰幃老師.<br>
+                        現任職務：弄一下工作室 執行長。<br>
+                        深耕視覺設計、社群行銷與教學領域，近期更致力於推廣 AI 科技應用與高效工作流。
                     </p>
                 </div>
 
-                <!-- Skill Card 2 -->
-                <div class="bg-white p-10 rounded-[30px] border-2 border-gray-100 hover:border-brandYellow hover:bg-brandYellow hover:shadow-xl hover:-translate-y-4 transform transition-all duration-300 group cursor-pointer">
-                    <div class="text-5xl font-black text-gray-200 group-hover:text-brandBlack transition-colors mb-6">02</div>
-                    <h4 class="text-2xl font-bold mb-4 uppercase tracking-wide">數據驅動與 CRO</h4>
-                    <p class="text-gray-600 group-hover:text-black/80 font-medium transition-colors">
-                        精準打擊育兒痛點，重構廣告受眾模型與獲客漏斗，透過 A/B 測試持續優化轉換率 (CRO)，有效壓縮獲客成本 (CAC)。
-                    </p>
-                </div>
-
-                <!-- Skill Card 3 -->
-                <div class="bg-white p-10 rounded-[30px] border-2 border-gray-100 hover:border-brandYellow hover:bg-brandYellow hover:shadow-xl hover:-translate-y-4 transform transition-all duration-300 group cursor-pointer">
-                    <div class="text-5xl font-black text-gray-200 group-hover:text-brandBlack transition-colors mb-6">03</div>
-                    <h4 class="text-2xl font-bold mb-4 uppercase tracking-wide">社群裂變與 KOL</h4>
-                    <p class="text-gray-600 font-medium leading-relaxed">
-                        熟稔中小型育兒 KOL 分潤操作與聯盟行銷，能結合內容矩陣與社群裂變機制，以最低預算撬動高額社群導購業績。
-                    </p>
+                <!-- 右側線條與幾何修飾區塊 (Design & Tech 風格) -->
+                <div class="w-full lg:w-1/2 relative h-64 lg:h-[450px] hidden md:flex justify-center items-center opacity-90 hover:opacity-100 transition-opacity duration-700 select-none pointer-events-none">
+                    <div class="relative w-full max-w-[400px] aspect-square">
+                        
+                        <!-- 背景網格線 -->
+                        <div class="absolute inset-0 grid grid-cols-4 grid-rows-4 border border-gray-100">
+                            <div class="border-r border-b border-gray-100"></div>
+                            <div class="border-r border-b border-gray-100"></div>
+                            <div class="border-r border-b border-gray-100"></div>
+                            <div class="border-b border-gray-100"></div>
+                            <div class="border-r border-b border-gray-100"></div>
+                            <div class="border-r border-b border-gray-100 relative">
+                                <div class="absolute -right-[4px] -bottom-[4px] w-2 h-2 bg-brandBlack rounded-full z-10"></div>
+                            </div>
+                            <div class="border-r border-b border-gray-100"></div>
+                            <div class="border-b border-gray-100"></div>
+                            <div class="border-r border-b border-gray-100"></div>
+                            <div class="border-r border-b border-gray-100"></div>
+                            <div class="border-r border-b border-gray-100 relative">
+                                <div class="absolute -right-[4px] -bottom-[4px] w-2 h-2 bg-brandYellow rounded-full z-10"></div>
+                            </div>
+                            <div class="border-b border-gray-100"></div>
+                            <div class="border-r border-gray-100"></div>
+                            <div class="border-r border-gray-100"></div>
+                            <div class="border-r border-gray-100"></div>
+                            <div></div>
+                        </div>
+                        
+                        <!-- 裝飾圓形 (Tech/UI 感) -->
+                        <div class="absolute top-[10%] right-[5%] w-40 h-40 border-[2px] border-gray-300 rounded-full border-dashed animate-[spin_20s_linear_infinite]"></div>
+                        <div class="absolute bottom-[15%] left-[5%] w-20 h-20 border-[6px] border-brandBlack rounded-full"></div>
+                        <div class="absolute top-[40%] right-[30%] w-8 h-8 bg-brandYellow rounded-full opacity-80"></div>
+                        
+                        <!-- 粗體幾何線條 (Design 感) -->
+                        <div class="absolute top-[30%] -left-[10%] w-[110%] h-[4px] bg-brandBlack transform -rotate-12 origin-left"></div>
+                        <div class="absolute top-[60%] left-[10%] w-[70%] h-[16px] bg-brandYellow transform rotate-3 origin-left"></div>
+                        
+                        <!-- 十字準星裝飾 (呼應 About 區塊) -->
+                        <div class="absolute bottom-[5%] right-[20%] crosshair text-gray-400 scale-150"></div>
+                        <div class="absolute top-[20%] left-[25%] crosshair text-gray-300 scale-110"></div>
+                    </div>
                 </div>
 
             </div>
+        </header>
 
-            <div class="mt-32 border-t border-gray-200 pt-20">
-                <h4 class="text-3xl md:text-5xl font-black text-center mb-16 uppercase tracking-tighter">Certifications</h4>
+        <div class="w-full bg-brandBlack text-brandWhite py-4 overflow-hidden border-y border-gray-800 z-20 relative">
+            <div class="marquee-container text-6xl md:text-8xl font-black tracking-tighter uppercase opacity-90">
+                <div class="marquee-content flex gap-8">
+                    <span>about.</span><span>about.</span><span>about.</span><span>about.</span><span>about.</span>
+                    <span>about.</span><span>about.</span><span>about.</span><span>about.</span><span>about.</span>
+                </div>
+            </div>
+        </div>
+
+        <section id="about" class="w-full py-24 px-6 md:px-12 bg-brandBlack text-brandWhite relative overflow-hidden">
+            <div class="absolute top-12 left-12 crosshair text-gray-700 opacity-50"></div>
+            <div class="absolute bottom-12 right-12 crosshair text-gray-700 opacity-50"></div>
+            
+            <div class="max-w-5xl mx-auto flex flex-col md:flex-row gap-16 relative z-10">
+                <div class="w-full md:w-1/3">
+                    <h2 class="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-4">Experience<br>& Bio</h2>
+                    <div class="w-16 h-2 bg-brandYellow mb-8"></div>
+                </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <!-- Certificate Card 1 -->
-                    <div class="bg-white p-4 rounded-[40px] border border-gray-100 shadow-sm hover:shadow-2xl hover:border-brandYellow transition-all duration-300 cursor-pointer group" onclick="openCertModal('cert1')">
-                        <div class="relative overflow-hidden rounded-[30px] aspect-[4/3] bg-gray-100 mb-6">
-                            <img src="https://api.accredible.com/v1/frontend/credential_website_embed_image/certificate/173854487?key=92c7e90fd8f2d5b74ab2f0f5b71a1d5d64c55f265e720128841961665dcaec4a" alt="Gemini 教職員認證" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                            <!-- Hover Overlay -->
-                            <div class="absolute inset-0 bg-brandYellow/90 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center text-white mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
-                                </div>
-                                <span class="font-bold text-black uppercase tracking-widest text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">View Details</span>
-                            </div>
-                        </div>
-                        <div class="px-4 pb-4 text-center">
-                            <h5 class="text-xl font-bold mb-2">Gemini 教職員認證</h5>
-                            <p class="text-gray-500 text-sm font-medium line-clamp-2">證明具備運用 Google AI 提升研究與教學效率的能力，能結合 Gemini 設計創新課程，激發學習熱情。</p>
-                        </div>
-                    </div>
+                <div class="w-full md:w-2/3 space-y-6 text-xl text-gray-300 font-medium leading-relaxed">
+                    <ul class="list-disc pl-6 space-y-4 marker:text-brandYellow">
+                        <li>淡江大學 職涯輔導組 組員</li>
+                        <li>三民輔考集團 美術編輯</li>
+                        <li>蒔蘿香草餐廳 行銷美編</li>
+                        <li>淡江大學 電腦繪圖設計認證研習 講師</li>
+                        <li>德霖技術學院 教學助理培訓課程 講師</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-                    <!-- Certificate Card 2 -->
-                    <div class="bg-white p-4 rounded-[40px] border border-gray-100 shadow-sm hover:shadow-2xl hover:border-brandYellow transition-all duration-300 cursor-pointer group" onclick="openCertModal('cert2')">
-                        <div class="relative overflow-hidden rounded-[30px] aspect-[4/3] bg-gray-100 mb-6">
-                            <img src="https://api.accredible.com/v1/frontend/credential_website_embed_image/certificate/173853695" alt="Gemini 大學生認證" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                            <!-- Hover Overlay -->
-                            <div class="absolute inset-0 bg-brandYellow/90 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center text-white mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
-                                </div>
-                                <span class="font-bold text-black uppercase tracking-widest text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">View Details</span>
-                            </div>
-                        </div>
-                        <div class="px-4 pb-4 text-center">
-                            <h5 class="text-xl font-bold mb-2">Gemini 大學生認證</h5>
-                            <p class="text-gray-500 text-sm font-medium line-clamp-2">熟練運用 Google AI 執行進階研究，在確保學術倫理與嚴謹性的前提下，全方位提升專業素養與生產力。</p>
-                        </div>
-                    </div>
-
-                    <!-- Certificate Card 3 -->
-                    <div class="bg-white p-4 rounded-[40px] border border-gray-100 shadow-sm hover:shadow-2xl hover:border-brandYellow transition-all duration-300 cursor-pointer group" onclick="openCertModal('cert3')">
-                        <div class="relative overflow-hidden rounded-[30px] aspect-[4/3] bg-gray-100 mb-6">
-                            <img src="https://api.accredible.com/v1/frontend/credential_website_embed_image/certificate/173631469" alt="Gemini 教育家認證" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                            <!-- Hover Overlay -->
-                            <div class="absolute inset-0 bg-brandYellow/90 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center text-white mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
-                                </div>
-                                <span class="font-bold text-black uppercase tracking-widest text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">View Details</span>
-                            </div>
-                        </div>
-                        <div class="px-4 pb-4 text-center">
-                            <h5 class="text-xl font-bold mb-2">Gemini 教育家認證</h5>
-                            <p class="text-gray-500 text-sm font-medium line-clamp-2">具備整合 Google AI 至教育現場的專業能力，能有效提升教學效率，並引導學生體驗創新的學習模式。</p>
-                        </div>
-                    </div>
+        <section class="w-full py-24 px-6 md:px-12 bg-brandYellow relative overflow-hidden z-20">
+            <div class="absolute inset-0 opacity-10 flex justify-center items-center pointer-events-none overflow-hidden">
+                <span class="text-[120px] md:text-[250px] font-black tracking-tighter whitespace-nowrap text-brandBlack">TOOLKIT.</span>
+            </div>
+            
+            <div class="relative z-10 max-w-6xl mx-auto flex flex-col items-center justify-center space-y-12">
+                <div class="text-center">
+                    <h2 class="text-4xl md:text-5xl font-black text-brandBlack uppercase tracking-tighter mb-4">Side Projects</h2>
+                    <div class="w-16 h-2 bg-brandBlack mx-auto mb-4"></div>
+                    <p class="text-brandBlack/80 font-bold tracking-widest uppercase text-sm">實驗室與實用工具</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
                     
-                    <!-- Certificate Card 4 (Empty/Placeholder) -->
-                    <div class="group relative flex flex-col items-center justify-center p-8 bg-gray-50 text-gray-400 rounded-[40px] border-2 border-dashed border-gray-300 min-h-[300px] cursor-not-allowed">
-                        <span class="relative z-10 flex flex-col items-center gap-4">
-                            <svg class="w-12 h-12 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                            <span class="font-bold text-lg text-center uppercase tracking-widest">More to Come</span>
+                    <a href="https://skypai0326.github.io/portfolio2026/ps-shortcut.html" target="_blank" rel="noopener noreferrer" class="group relative flex flex-col items-center justify-center p-8 bg-brandBlack text-brandWhite rounded-[30px] overflow-hidden shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 h-48">
+                        <span class="absolute inset-0 w-full h-full bg-white scale-0 group-hover:scale-110 transition-transform duration-500 ease-out origin-center rounded-[30px]"></span>
+                        <span class="relative z-10 flex flex-col items-center gap-3 group-hover:text-black transition-colors duration-300">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            <span class="font-bold text-lg text-center">PS 快捷鍵工具</span>
+                        </span>
+                    </a>
+
+                    <a href="https://skypai0326.github.io/portfolio2026/snake.html" target="_blank" rel="noopener noreferrer" class="group relative flex flex-col items-center justify-center p-8 bg-brandBlack text-brandWhite rounded-[30px] overflow-hidden shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 h-48">
+                        <span class="absolute inset-0 w-full h-full bg-white scale-0 group-hover:scale-110 transition-transform duration-500 ease-out origin-center rounded-[30px]"></span>
+                        <span class="relative z-10 flex flex-col items-center gap-3 group-hover:text-black transition-colors duration-300">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span class="font-bold text-lg text-center">經典貪食蛇</span>
+                        </span>
+                    </a>
+
+                    <div class="group relative flex flex-col items-center justify-center p-8 bg-brandBlack/50 text-brandWhite/50 rounded-[30px] border-2 border-dashed border-brandBlack/30 h-48 cursor-not-allowed">
+                        <span class="relative z-10 flex flex-col items-center gap-3">
+                            <svg class="w-10 h-10 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                            <span class="font-bold text-lg text-center">Coming Soon</span>
                         </span>
                     </div>
+
+                    <div class="group relative flex flex-col items-center justify-center p-8 bg-brandBlack/50 text-brandWhite/50 rounded-[30px] border-2 border-dashed border-brandBlack/30 h-48 cursor-not-allowed">
+                        <span class="relative z-10 flex flex-col items-center gap-3">
+                            <svg class="w-10 h-10 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                            <span class="font-bold text-lg text-center">Coming Soon</span>
+                        </span>
+                    </div>
+
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <div class="w-full bg-brandBlack text-brandWhite py-6 overflow-hidden z-20 relative">
-                        </div>
-                    </div>
-                    <div class="w-full lg:w-1/2 order-1 lg:order-2">
-                        <div class="relative aspect-square max-w-md mx-auto rounded-full overflow-hidden bg-gray-800 border-8 border-brandYellow/20">
-                            <img src="https://placehold.co/600x600/333333/cccccc?text=SEO+Content" alt="SEO Project" class="w-full h-full object-cover opacity-80 hover:opacity-100 transition duration-500">
+        <section id="skills" class="w-full py-24 px-6 md:px-12 bg-brandWhite">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="text-5xl font-black uppercase tracking-tighter mb-16 text-center">Core<br>Competencies</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <article class="bg-white p-10 rounded-[30px] border-2 border-gray-100 hover:border-brandYellow hover:bg-brandYellow hover:shadow-xl hover:-translate-y-4 transform transition-all duration-300 group">
+                        <div class="text-5xl font-black text-gray-200 group-hover:text-brandBlack transition-colors mb-6">01</div>
+                        <h3 class="text-2xl font-bold mb-4 uppercase tracking-wide">專業軟體應用</h3>
+                        <p class="text-gray-600 group-hover:text-black/80 font-medium transition-colors">
+                            精通 Adobe Illustrator、Adobe Photoshop、Adobe InDesign 與 Adobe Premiere Pro 等主流設計軟體。
+                        </p>
+                    </article>
+
+                    <article class="bg-white p-10 rounded-[30px] border-2 border-gray-100 hover:border-brandYellow hover:bg-brandYellow hover:shadow-xl hover:-translate-y-4 transform transition-all duration-300 group">
+                        <div class="text-5xl font-black text-gray-200 group-hover:text-brandBlack transition-colors mb-6">02</div>
+                        <h3 class="text-2xl font-bold mb-4 uppercase tracking-wide">視覺與平面設計</h3>
+                        <p class="text-gray-600 group-hover:text-black/80 font-medium transition-colors">
+                            擅長各類文宣、指導手冊、宣傳海報及網頁 Banner 設計，準確傳達品牌與活動價值。
+                        </p>
+                    </article>
+
+                    <article class="bg-white p-10 rounded-[30px] border-2 border-gray-100 hover:border-brandYellow hover:bg-brandYellow hover:shadow-xl hover:-translate-y-4 transform transition-all duration-300 group">
+                        <div class="text-5xl font-black text-gray-200 group-hover:text-brandBlack transition-colors mb-6">03</div>
+                        <h3 class="text-2xl font-bold mb-4 uppercase tracking-wide">社群行銷與經營</h3>
+                        <p class="text-gray-600 font-medium leading-relaxed group-hover:text-black/80 transition-colors">
+                            具備臉書（Facebook）粉絲專頁與微信公眾號的視覺設計、圖文排版與實務經營能力。
+                        </p>
+                    </article>
+
+                    <article class="bg-white p-10 rounded-[30px] border-2 border-gray-100 hover:border-brandYellow hover:bg-brandYellow hover:shadow-xl hover:-translate-y-4 transform transition-all duration-300 group">
+                        <div class="text-5xl font-black text-gray-200 group-hover:text-brandBlack transition-colors mb-6">04</div>
+                        <h3 class="text-2xl font-bold mb-4 uppercase tracking-wide">攝影與活動策劃</h3>
+                        <p class="text-gray-600 font-medium leading-relaxed group-hover:text-black/80 transition-colors">
+                            擁有活動紀錄、婚攝及商攝專業；並能企劃與主持團康活動、團體動力營及未婚聯誼。
+                        </p>
+                    </article>
+
+                    <article class="bg-white p-10 rounded-[30px] border-2 border-gray-100 hover:border-brandYellow hover:bg-brandYellow hover:shadow-xl hover:-translate-y-4 transform transition-all duration-300 group">
+                        <div class="text-5xl font-black text-gray-200 group-hover:text-brandBlack transition-colors mb-6">05</div>
+                        <h3 class="text-2xl font-bold mb-4 uppercase tracking-wide">資訊與設計教學</h3>
+                        <p class="text-gray-600 font-medium leading-relaxed group-hover:text-black/80 transition-colors">
+                            長期投入 TQC+、ACA 證照研習；近期跨足教授 AI 行政自動化與高效工作流（Gemini、Make、n8n）。
+                        </p>
+                    </article>
+                </div>
+
+                <div class="mt-32 border-t border-gray-200 pt-20">
+                    <h3 class="text-3xl md:text-5xl font-black text-center mb-16 uppercase tracking-tighter">Certifications</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <!-- 使用 button 替換 div 提升無障礙體驗，並改用 data-* 綁定資料 -->
+                        <button type="button" class="cert-trigger text-left w-full bg-white p-4 rounded-[40px] border border-gray-100 shadow-sm hover:shadow-2xl hover:border-brandYellow transition-all duration-300 group block" data-cert-id="cert1">
+                            <div class="relative overflow-hidden rounded-[30px] aspect-[4/3] bg-gray-100 mb-6">
+                                <img src="https://api.accredible.com/v1/frontend/credential_website_embed_image/certificate/173854487?key=92c7e90fd8f2d5b74ab2f0f5b71a1d5d64c55f265e720128841961665dcaec4a" alt="Gemini 教職員認證" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                <div class="absolute inset-0 bg-brandYellow/90 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center text-white mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+                                    </div>
+                                    <span class="font-bold text-black uppercase tracking-widest text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">View Details</span>
+                                </div>
+                            </div>
+                            <div class="px-4 pb-4 text-center">
+                                <h4 class="text-xl font-bold mb-2">Gemini 教職員認證</h4>
+                                <p class="text-gray-500 text-sm font-medium line-clamp-2">證明您清楚瞭解 Gemini 的用途，並能負責任地運用 Google AI 提升研究效率、激發學生學習熱情，以及設計創新課程。</p>
+                            </div>
+                        </button>
+
+                        <button type="button" class="cert-trigger text-left w-full bg-white p-4 rounded-[40px] border border-gray-100 shadow-sm hover:shadow-2xl hover:border-brandYellow transition-all duration-300 group block" data-cert-id="cert2">
+                            <div class="relative overflow-hidden rounded-[30px] aspect-[4/3] bg-gray-100 mb-6">
+                                <img src="https://api.accredible.com/v1/frontend/credential_website_embed_image/certificate/173853695" alt="Gemini 大學生認證" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                <div class="absolute inset-0 bg-brandYellow/90 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center text-white mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+                                    </div>
+                                    <span class="font-bold text-black uppercase tracking-widest text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">View Details</span>
+                                </div>
+                            </div>
+                            <div class="px-4 pb-4 text-center">
+                                <h4 class="text-xl font-bold mb-2">Gemini 大學生認證</h4>
+                                <p class="text-gray-500 text-sm font-medium line-clamp-2">證明您清楚瞭解 Gemini 的用途，並能負責任地運用 Google AI 執行進階研究、確保學術嚴謹性，以及提升專業素養。</p>
+                            </div>
+                        </button>
+
+                        <button type="button" class="cert-trigger text-left w-full bg-white p-4 rounded-[40px] border border-gray-100 shadow-sm hover:shadow-2xl hover:border-brandYellow transition-all duration-300 group block" data-cert-id="cert3">
+                            <div class="relative overflow-hidden rounded-[30px] aspect-[4/3] bg-gray-100 mb-6">
+                                <img src="https://api.accredible.com/v1/frontend/credential_website_embed_image/certificate/173631469" alt="Gemini 教育家認證" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                <div class="absolute inset-0 bg-brandYellow/90 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center text-white mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+                                    </div>
+                                    <span class="font-bold text-black uppercase tracking-widest text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">View Details</span>
+                                </div>
+                            </div>
+                            <div class="px-4 pb-4 text-center">
+                                <h4 class="text-xl font-bold mb-2">Gemini 教育家認證</h4>
+                                <p class="text-gray-500 text-sm font-medium line-clamp-2">證明您清楚瞭解 Gemini 的用途，並能負責任地運用 Google AI 提升效率、引導學生順利學習，創新學習體驗。</p>
+                            </div>
+                        </button>
+                        
+                        <div class="group relative flex flex-col items-center justify-center p-8 bg-gray-50 text-gray-400 rounded-[40px] border-2 border-dashed border-gray-300 min-h-[300px] cursor-not-allowed">
+                            <span class="relative z-10 flex flex-col items-center gap-4">
+                                <svg class="w-12 h-12 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                                <span class="font-bold text-lg text-center uppercase tracking-widest">More to Come</span>
+                            </span>
                         </div>
                     </div>
                 </div>
-
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- 修復先前斷裂的 div 結構，並補回標準化的表單 -->
+        <section id="works" class="w-full py-24 px-6 md:px-12 bg-brandBlack text-brandWhite relative z-20">
+            <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12">
+                
+                <!-- 表單區塊 (標準化 id, for, type) -->
+                <div class="w-full lg:w-1/2 order-2 lg:order-1">
+                    <h2 class="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-8">Contact Me</h2>
+                    <form class="space-y-6">
+                        <div>
+                            <label for="contactName" class="block text-sm font-bold uppercase tracking-widest mb-2 text-gray-400">Name</label>
+                            <input type="text" id="contactName" name="name" class="w-full bg-gray-900 border border-gray-800 rounded-2xl p-4 text-white focus:outline-none focus:border-brandYellow transition" required>
+                        </div>
+                        <div>
+                            <label for="contactEmail" class="block text-sm font-bold uppercase tracking-widest mb-2 text-gray-400">Email</label>
+                            <input type="email" id="contactEmail" name="email" class="w-full bg-gray-900 border border-gray-800 rounded-2xl p-4 text-white focus:outline-none focus:border-brandYellow transition" required>
+                        </div>
+                        <div>
+                            <label for="contactMessage" class="block text-sm font-bold uppercase tracking-widest mb-2 text-gray-400">Message</label>
+                            <textarea id="contactMessage" name="message" rows="4" class="w-full bg-gray-900 border border-gray-800 rounded-2xl p-4 text-white focus:outline-none focus:border-brandYellow transition" required></textarea>
+                        </div>
+                        <button type="submit" class="w-full md:w-auto bg-brandYellow text-brandBlack font-black uppercase tracking-widest py-4 px-10 rounded-full hover:bg-white transition-colors duration-300">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+
+                <!-- 原有的圖片區塊 -->
+                <div class="w-full lg:w-1/2 order-1 lg:order-2">
+                    <div class="relative aspect-square max-w-md mx-auto rounded-full overflow-hidden bg-gray-800 border-8 border-brandYellow/20">
+                        <img src="https://placehold.co/600x600/333333/cccccc?text=SEO+Content" alt="SEO Project" class="w-full h-full object-cover opacity-80 hover:opacity-100 transition duration-500">
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+    </main>
 
     <footer class="w-full py-12 px-6 bg-brandBlack text-white border-t border-gray-900">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
-            <div class="text-3xl font-black tracking-tighter mb-4 md:mb-0">XMW.</div>
-            
-            <div class="flex space-x-6">
-                <a href="mailto:xm.wang@example.com" class="text-gray-400 hover:text-brandYellow font-bold uppercase tracking-widest text-sm transition">Email</a>
-                <a href="#" class="text-gray-400 hover:text-brandYellow font-bold uppercase tracking-widest text-sm transition">LinkedIn</a>
-            </div>
+            <div class="text-3xl font-black tracking-tighter mb-4 md:mb-0">BCW.</div>
             
             <div class="text-gray-600 text-xs font-bold mt-8 md:mt-0 uppercase tracking-widest">
-                © 2026 Xiaoming Wang.
+                © 2026 白辰幃 Bai Chen-Wei.
             </div>
         </div>
     </footer>
 
-    <!-- Certificate Modal (Hidden by default) -->
-    <div id="certModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 sm:p-6" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-        <!-- Backdrop -->
-        <div id="certModalBackdrop" class="fixed inset-0 bg-black/80 backdrop-blur-sm opacity-0 transition-opacity duration-300" onclick="closeCertModal()"></div>
+    <!-- Certificate Modal -->
+    <div id="certModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 sm:p-6" aria-labelledby="modalTitle" role="dialog" aria-modal="true">
+        <!-- 移除 inline onclick，改由腳本綁定 -->
+        <div id="certModalBackdrop" class="fixed inset-0 bg-black/80 backdrop-blur-sm opacity-0 transition-opacity duration-300"></div>
         
-        <!-- Modal Content Panel -->
         <div id="certModalPanel" class="relative w-full max-w-5xl bg-white rounded-[40px] overflow-hidden flex flex-col md:flex-row shadow-2xl transform scale-95 opacity-0 transition-all duration-300 z-10">
             
-            <!-- Close Button -->
-            <button onclick="closeCertModal()" class="absolute top-4 right-4 z-20 w-12 h-12 bg-black/10 hover:bg-brandYellow text-black rounded-full flex items-center justify-center transition-colors">
+            <!-- 加入 type="button" 與 aria-label -->
+            <button type="button" id="closeCertModalBtn" aria-label="關閉認證視窗" class="absolute top-4 right-4 z-20 w-12 h-12 bg-black/10 hover:bg-brandYellow text-black rounded-full flex items-center justify-center transition-colors focus:outline-none focus:ring-2 focus:ring-brandBlack">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
 
-            <!-- Image Section -->
             <div class="w-full md:w-3/5 bg-gray-100 flex items-center justify-center p-6 md:p-12 border-b md:border-b-0 md:border-r border-gray-200">
                 <img id="modalImg" src="" alt="Certificate Detailed" class="w-full h-auto max-h-[50vh] md:max-h-[70vh] object-contain shadow-md rounded-xl">
             </div>
 
-            <!-- Text/Description Section -->
             <div class="w-full md:w-2/5 p-8 md:p-12 flex flex-col justify-center bg-white">
                 <div class="w-12 h-1 bg-brandYellow mb-6"></div>
                 <h3 id="modalTitle" class="text-2xl md:text-3xl font-black mb-4 tracking-tight leading-snug text-brandBlack"></h3>
@@ -396,26 +417,24 @@
         </div>
     </div>
 
-    <!-- JavaScript for Modal Logic -->
     <script>
-        // Certificate Data Store
         const certData = {
             cert1: {
                 img: "https://api.accredible.com/v1/frontend/credential_website_embed_image/certificate/173854487?key=92c7e90fd8f2d5b74ab2f0f5b71a1d5d64c55f265e720128841961665dcaec4a",
                 title: "Gemini 教職員認證",
-                desc: "取得 Google 官方頒發之 Gemini 教職員認證，證明我已深入瞭解並能負責任地運用生成式 AI 技術。此認證涵蓋如何透過 Google AI 工具大幅提升學術研究效率、輔助日常教學行政工作。更能將 AI 融入教材設計中，打造具備創新性與互動性的課程內容，有效激發學生的學習熱情與潛能。",
+                desc: "證明您清楚瞭解 Gemini 的用途，並能負責任地運用 Google AI 提升研究效率、激發學生學習熱情，以及設計創新課程。此認證涵蓋如何透過 AI 工具大幅提升學術與行政效率，並將其融入教材中創造優質體驗。",
                 date: "Issued by Google"
             },
             cert2: {
                 img: "https://api.accredible.com/v1/frontend/credential_website_embed_image/certificate/173853695",
                 title: "Gemini 大學生認證",
-                desc: "通過 Google Gemini 大學生認證，展現我在高等教育環境中善用 AI 工具的實力。我能精準且負責任地運用 Google AI 輔助進階資料蒐集與學術研究，在嚴格遵守學術倫理與確保內容嚴謹性的基礎上，有效提升個人學習效率與專業素養，為未來的挑戰奠定紮實的數位科技基礎。",
+                desc: "證明您清楚瞭解 Gemini 的用途，並能負責任地運用 Google AI 執行進階研究、確保學術嚴謹性，以及提升專業素養。展現了在高等教育環境中善用 AI 輔助資料蒐集，同時嚴格遵守學術倫理的能力。",
                 date: "Issued by Google"
             },
             cert3: {
                 img: "https://api.accredible.com/v1/frontend/credential_website_embed_image/certificate/173631469",
                 title: "Gemini 教育家認證",
-                desc: "榮獲 Google Gemini 教育家認證，代表我具備將前瞻 AI 技術無縫融入教學現場的專業能力。我不僅能運用 Google AI 系統化地提升備課與教學效率，更能成為引導學生正確、安全使用 AI 工具的領航者。透過 AI 輔助，我致力於打破傳統教學框架，創造高度互動且充滿啟發性的創新學習體驗。",
+                desc: "證明您清楚瞭解 Gemini 的用途，並能負責任地運用 Google AI 提升效率、引導學生順利學習，創新學習體驗。代表具備將前瞻 AI 技術無縫融入教學現場的專業能力，並成為引導學生正確使用 AI 的領航者。",
                 date: "Issued by Google"
             }
         };
@@ -423,45 +442,59 @@
         const modal = document.getElementById('certModal');
         const backdrop = document.getElementById('certModalBackdrop');
         const panel = document.getElementById('certModalPanel');
+        const closeBtn = document.getElementById('closeCertModalBtn');
+        const certTriggers = document.querySelectorAll('.cert-trigger');
 
+        // 打開 Modal 函數
         function openCertModal(certId) {
             const data = certData[certId];
+            if (!data) return;
             
-            // Populate data
             document.getElementById('modalImg').src = data.img;
             document.getElementById('modalTitle').innerText = data.title;
             document.getElementById('modalDesc').innerText = data.desc;
             document.getElementById('modalDate').innerText = data.date;
 
-            // Show Modal Container
             modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            document.body.style.overflow = 'hidden'; 
             
-            // Trigger animation (reflow hack)
-            void modal.offsetWidth; 
+            void modal.offsetWidth; // Trigger reflow
             
-            // Fade in and scale up
             backdrop.classList.remove('opacity-0');
             backdrop.classList.add('opacity-100');
             panel.classList.remove('opacity-0', 'scale-95');
             panel.classList.add('opacity-100', 'scale-100');
+            
+            // 聚焦於關閉按鈕以提升無障礙體驗
+            closeBtn.focus();
         }
 
+        // 關閉 Modal 函數
         function closeCertModal() {
-            // Fade out and scale down
             backdrop.classList.remove('opacity-100');
             backdrop.classList.add('opacity-0');
             panel.classList.remove('opacity-100', 'scale-100');
             panel.classList.add('opacity-0', 'scale-95');
 
-            // Wait for transition to finish before hiding container
             setTimeout(() => {
                 modal.classList.add('hidden');
-                document.body.style.overflow = ''; // Restore scrolling
+                document.body.style.overflow = ''; 
             }, 300);
         }
 
-        // Close on ESC key
+        // 綁定所有認證按鈕點擊事件
+        certTriggers.forEach(trigger => {
+            trigger.addEventListener('click', function() {
+                const certId = this.getAttribute('data-cert-id');
+                openCertModal(certId);
+            });
+        });
+
+        // 綁定關閉事件
+        closeBtn.addEventListener('click', closeCertModal);
+        backdrop.addEventListener('click', closeCertModal);
+
+        // 綁定 ESC 鍵關閉
         document.addEventListener('keydown', function(event) {
             if (event.key === "Escape" && !modal.classList.contains('hidden')) {
                 closeCertModal();
